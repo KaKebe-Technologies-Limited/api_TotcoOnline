@@ -4,14 +4,15 @@ include '../dbConfig.php';
 include '../sanitizer.php';
 
 $response['success'] = 0;
+// empty();
 
-if (isset($_REQUEST['raw_data'])  && $_REQUEST['raw_data'] !== "") {
-    $jsonData = $_REQUEST['raw_data'];
-    $PHPobj = json_decode($jsonData);
+$jsonData = json_decode(file_get_contents("php://input"));
 
-    if ($userName = $PHPobj->username) {
+if ( !empty($jsonData->username)  && !empty($jsonData->order_data)) {
 
-        if ($orders = $PHPobj->order_data) {
+    if ($userName = $jsonData->username) {
+
+        if ($orders = $jsonData->order_data) {
             //handle cleaning here
             clean_input($userName);
             $response['user'] = $userName;
@@ -24,7 +25,7 @@ if (isset($_REQUEST['raw_data'])  && $_REQUEST['raw_data'] !== "") {
                     $row = $result->fetch_assoc();
                     $userId = $row["user_id"];
 
-                    $sql1 = "INSERT INTO tbl_sales_order ( createdBy ) VALUES ('$createdBy')";
+                    $sql1 = "INSERT INTO tbl_sales_order ( createdBy ) VALUES ('$userId')";
 
                     if ($conn->query($sql1) === TRUE) {
                         $order_id = $conn->insert_id;
