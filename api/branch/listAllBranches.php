@@ -4,7 +4,7 @@ include '../dbConfig.php';
 
 $response['success'] = 0;
 
-$sql = "SELECT * FROM tbl_product WHERE isDeleted = '0'";
+$sql = "SELECT * FROM tbl_branch";
 
 if ($result = $conn->query($sql)) {
     if ($result->num_rows > 0) {
@@ -16,7 +16,7 @@ if ($result = $conn->query($sql)) {
 
         $response['success'] = 1;
         $response['totalResults'] = count($getdata);
-        $response['products'] = $getdata;
+        $response['branches'] = $getdata;
         
     } else {
         $response['status'] = "0 results";
