@@ -42,6 +42,7 @@ if ($result1 = $conn->query($sql1)) {
             }  
         } // end while loop
         // $response['order_status'] = $order_status;
+        $response['totalOrders'] = count($response_array);
         $response['orders'] = $response_array;
 
     } else {
