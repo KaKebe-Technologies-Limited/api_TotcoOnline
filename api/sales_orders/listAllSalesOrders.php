@@ -5,7 +5,11 @@ include '../sanitizer.php';
 
 $response['success'] = 0;
 
-$sql1 = "SELECT * FROM tbl_sales_order WHERE isDeleted = '0'";
+// $sql1 = "SELECT * FROM tbl_sales_order WHERE isDeleted = '0'";
+$sql1 = "SELECT o.* , u.user_id, u.username Agent_Name, u.firstname, u.lastname
+FROM tbl_sales_order o
+JOIN tbl_user u ON o.createdBy= u.user_id
+WHERE isDeleted = '0'";
 
 $response_array = array();
 

@@ -4,7 +4,6 @@ include '../dbConfig.php';
 include '../sanitizer.php';
 
 $response['success'] = 0;
-// empty();
 
 $jsonData = json_decode(file_get_contents("php://input"));
 
@@ -18,7 +17,6 @@ if ( !empty($jsonData->username)  && !empty($jsonData->order_data)) {
             $response['user'] = $userName;
 
             $sql = "SELECT * FROM  tbl_user WHERE username = '$userName' LIMIT 1";
-            // $sql = "INSERT INTO tbl_sales_order ( createdBy ) VALUES ('$createdBy')";
 
             if ($result = $conn->query($sql)) {
                 if ($result->num_rows > 0) {
