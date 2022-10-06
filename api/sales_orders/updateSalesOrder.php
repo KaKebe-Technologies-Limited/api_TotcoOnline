@@ -29,6 +29,20 @@ if (isset($_REQUEST['id']) && $_REQUEST['id'] !== "") {
         array_push($fieldsCaptured, "isApproved");
     } 
 
+    // createdBy  
+    if (isset($_REQUEST['createdBy']) && $_REQUEST['createdBy'] !== "") {
+        $createdBy = $_REQUEST['createdBy'];
+        clean_input($createdBy);
+        if ($comma) {
+            $sql .= ", createdBy = '$createdBy'";
+        } else {
+            $sql .= " createdBy = '$createdBy'";
+            $comma = 1;
+        }
+        $atleast1Param = 1; 
+        array_push($fieldsCaptured, "createdBy");      
+    } 
+
     // approvedBy  
     if (isset($_REQUEST['approvedBy']) && $_REQUEST['approvedBy'] !== "") {
         $approvedBy = $_REQUEST['approvedBy'];
