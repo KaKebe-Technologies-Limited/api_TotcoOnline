@@ -16,7 +16,13 @@ if (isset($_REQUEST['id'])  && $_REQUEST['id'] !== "") {
     JOIN tbl_user u ON o.createdBy= u.user_id
     WHERE o.sales_order_id = '$id' AND isDeleted = '0' LIMIT 1";
 
-    $sql = "SELECT op.order_vs_pdt_id, op.sales_order_id, op.product_id, op.quantity, p.pdt_name FROM tbl_order_vs_product op JOIN tbl_sales_order o ON op.sales_order_id = o.sales_order_id JOIN tbl_product p ON op.product_id = p.product_id WHERE op.sales_order_id = '$id' ORDER BY op.order_vs_pdt_id DESC";
+    $sql = "SELECT op.order_vs_pdt_id, op.sales_order_id, op.product_id, op.quantity, op.selling_price, p.pdt_name 
+    FROM tbl_order_vs_product op 
+    JOIN tbl_sales_order o ON op.sales_order_id = o.sales_order_id 
+    JOIN tbl_product p ON op.product_id = p.product_id 
+    WHERE op.sales_order_id = '$id' 
+    ORDER BY op.order_vs_pdt_id 
+    DESC";
 
     if ($result1 = $conn->query($sql1)) {
     
